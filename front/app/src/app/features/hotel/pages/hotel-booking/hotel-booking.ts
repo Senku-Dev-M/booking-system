@@ -277,7 +277,9 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
 
     const bookingData: CreateBookingRequest = {
       userId: user.id,
-      hotelId: hotel._id || hotel.id,
+      // Some responses might use `id` instead of `_id`. Use a non-null
+      // assertion to satisfy TypeScript while still accepting both shapes.
+      hotelId: hotel._id || hotel.id!,
       roomId: roomGroup.rooms[0].id,
       checkInDate: dates.checkIn.toISOString().split('T')[0],
       checkOutDate: dates.checkOut.toISOString().split('T')[0],

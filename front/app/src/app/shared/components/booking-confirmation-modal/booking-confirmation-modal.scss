@@ -1,0 +1,310 @@
+* {
+  box-sizing: border-box;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.booking-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 15px;
+  background: #ffffff;
+  padding: 33px 30px 41px 82px;
+  width: 800px;
+  min-height: 540px;
+
+  .booking-title {
+    margin: 0px 0px 0px 196px;
+    line-height: 38px;
+    letter-spacing: 0;
+    color: #370F41;
+    font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .booking-date-section {
+    position: relative;
+    margin-top: 35px;
+    margin-left: 69px;
+    width: 485px;
+    height: 86px;
+
+    .date-container {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 2px solid #370F41;
+      border-radius: 10px;
+      background: #370F41;
+      padding: 6px 16px 25px 23px;
+      width: 485px;
+      height: 86px;
+
+      .date-header {
+        margin: 0px 0px 0px 173px;
+        line-height: 17px;
+        letter-spacing: 0;
+        color: #ffffff;
+        font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .date-content {
+        display: flex;
+        align-items: center;
+        align-self: stretch;
+        justify-content: space-between;
+        margin-top: 17px;
+        padding-right: 0;
+        padding-left: 0;
+        position: relative;
+
+        .date-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #ffffff;
+          font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+
+          i {
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+          }
+
+          .date-label {
+            line-height: 17px;
+            letter-spacing: 0;
+            font-size: 14px;
+            font-weight: 300;
+          }
+
+          .date-value {
+            line-height: 19px;
+            letter-spacing: 0;
+            font-size: 16px;
+            margin-left: 8px;
+          }
+        }
+
+        .date-separator {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(90deg);
+          background: rgba(255, 255, 255, 0.22);
+          width: 53px;
+          height: 1px;
+        }
+      }
+    }
+  }
+
+  .booking-for-section {
+    margin: 13px 0px 0px 3px;
+    line-height: 24px;
+    letter-spacing: 0;
+    font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+
+    .booking-for-label {
+      color: #370F41;
+    }
+
+    .booking-for-name {
+      color: #000000f7;
+      margin-left: 20px;
+    }
+  }
+
+  .contact-section {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    margin-top: 22px;
+    padding-right: 50px;
+    padding-left: 7px;
+    gap: 20px;
+
+    .input-group {
+      flex: 1;
+
+      .contact-input {
+        display: flex;
+        align-items: center;
+        border: 2px solid #370F41;
+        border-radius: 8px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 8px 14px;
+        width: 100%;
+        height: 40px;
+        font-family: "Encode Sans Condensed", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.8);
+        background: white;
+        outline: none;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: #7977A0;
+        }
+
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+
+  .policy-section {
+    margin-top: 16px;
+    width: 100%;
+
+    .policy-title {
+      margin: 0;
+      line-height: 24px;
+      letter-spacing: 0;
+      color: #370F41;
+      font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .policy-content {
+      margin: 7px 0px 0px 5px;
+      width: 640px;
+
+      p {
+        line-height: 26px;
+        letter-spacing: 0;
+        color: #000000;
+        font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        margin: 0 0 8px 0;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    margin-top: 44px;
+    padding-right: 0;
+    padding-left: 340px;
+
+    .cancel-btn {
+      background: none;
+      border: none;
+      line-height: 28px;
+      letter-spacing: 0;
+      color: #515151;
+      font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #7977A0;
+      }
+    }
+
+    .confirm-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+      border-radius: 5px;
+      background: #370F41;
+      padding: 10px 12px 9px 16px;
+      width: 246px;
+      min-width: 246px;
+      height: 43px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background: #7977A0;
+      }
+
+      &:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+
+      span {
+        line-height: 24px;
+        letter-spacing: 0;
+        color: #ffffff;
+        font-family: Rubik, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+      }
+
+      i {
+        width: 20px;
+        height: 20px;
+        color: #ffffff;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .booking-modal {
+    width: 90vw;
+    padding: 20px;
+
+    .booking-title {
+      margin: 0 0 0 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .booking-date-section {
+      margin-left: 0;
+      width: 100%;
+
+      .date-container {
+        width: 100%;
+      }
+    }
+
+    .policy-section .policy-content {
+      width: 100%;
+    }
+
+    .action-buttons {
+      padding-left: 0;
+      justify-content: space-around;
+    }
+  }
+}

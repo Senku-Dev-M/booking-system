@@ -1,0 +1,868 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Sistema de Reservas Hoteleras",
+    "version": "1.0.0",
+    "description": "API RESTful para la gestión de hoteles, habitaciones y reservas."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Servidor de desarrollo local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Autenticación",
+      "description": "Operaciones de autenticación de usuarios"
+    },
+    {
+      "name": "Hoteles",
+      "description": "Operaciones relacionadas con los hoteles"
+    },
+    {
+      "name": "Habitaciones",
+      "description": "Operaciones relacionadas con las habitaciones y su búsqueda"
+    },
+    {
+      "name": "Reservas",
+      "description": "Operaciones relacionadas con las reservas"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Autenticación"],
+        "summary": "Iniciar sesión",
+        "description": "Obtiene un token JWT para autenticación. Usa el token en el header `Authorization: Bearer <token>` para acceder a rutas protegidas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "admin"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token JWT generado exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Token JWT para autenticación"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": ["Autenticación"],
+        "summary": "Registrar un nuevo usuario",
+        "description": "Crea un nuevo usuario en el sistema. Luego podrás iniciar sesión con ese usuario.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "nuevo_usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password_seguro"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario registrado exitosamente"
+          },
+          "400": {
+            "description": "Datos inválidos o usuario ya existe"
+          }
+        }
+      }
+    },
+    "/hotels": {
+      "get": {
+        "tags": ["Hoteles"],
+        "security": [{ "bearerAuth": [] }],
+        "summary": "Obtener todos los hoteles",
+        "description": "Devuelve una lista de todos los hoteles registrados en el sistema.",
+        "responses": {
+          "200": {
+            "description": "Lista de hoteles recuperada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Hotel"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Hoteles"],
+        "security": [{ "bearerAuth": [] }],
+        "summary": "Crear un nuevo hotel",
+        "description": "Permite registrar un nuevo hotel en el sistema.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHotelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Hotel creado exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hotel"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/hotels/{id}": {
+      "get": {
+        "tags": ["Hoteles"],
+        "summary": "Obtener un hotel por ID",
+        "description": "Devuelve los detalles de un hotel específico.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/HotelId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del hotel recuperados exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hotel"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Hoteles"],
+        "summary": "Actualizar un hotel por ID",
+        "description": "Actualiza la información de un hotel existente.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/HotelId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHotelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Hotel actualizado exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hotel"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Hoteles"],
+        "summary": "Eliminar un hotel por ID",
+        "description": "Elimina un hotel del sistema.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/HotelId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Hotel eliminado exitosamente"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/rooms": {
+      "get": {
+        "tags": ["Habitaciones"],
+        "security": [{ "bearerAuth": [] }],
+        "summary": "Buscar y obtener habitaciones",
+        "description": "Devuelve una lista de habitaciones filtradas por número de personas, ubicación y/o rango de precios.",
+        "parameters": [
+          {
+            "name": "people",
+            "in": "query",
+            "description": "Número de personas a alojar.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Ubicación del hotel.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "description": "Precio mínimo por noche.",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "description": "Precio máximo por noche.",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de habitaciones encontrada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Room"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Habitaciones"],
+        "summary": "Crear una nueva habitación",
+        "description": "Permite registrar una nueva habitación para un hotel existente.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Habitación creada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Room"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/rooms/{id}": {
+      "get": {
+        "tags": ["Habitaciones"],
+        "summary": "Obtener una habitación por ID",
+        "description": "Devuelve los detalles de una habitación específica.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RoomId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles de la habitación recuperados exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Room"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Habitaciones"],
+        "summary": "Actualizar una habitación por ID",
+        "description": "Actualiza la información de una habitación existente.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RoomId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Habitación actualizada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Room"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Habitaciones"],
+        "summary": "Eliminar una habitación por ID",
+        "description": "Elimina una habitación del sistema.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RoomId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Habitación eliminada exitosamente"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Hotel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID único del hotel"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nombre del hotel"
+          },
+          "location": {
+            "type": "string",
+            "description": "Ubicación del hotel"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descripción del hotel"
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Lista de servicios ofrecidos por el hotel"
+          }
+        },
+        "required": ["id", "name", "location"]
+      },
+      "CreateHotelRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre del hotel"
+          },
+          "location": {
+            "type": "string",
+            "description": "Ubicación del hotel"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descripción del hotel",
+            "nullable": true
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Lista de servicios",
+            "nullable": true
+          }
+        },
+        "required": ["name", "location"]
+      },
+      "UpdateHotelRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre del hotel",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "description": "Ubicación del hotel",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Descripción del hotel",
+            "nullable": true
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Lista de servicios",
+            "nullable": true
+          }
+        }
+      },
+      "Room": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID único de la habitación"
+          },
+          "hotelId": {
+            "type": "string",
+            "description": "ID del hotel al que pertenece la habitación"
+          },
+          "roomNumber": {
+            "type": "string",
+            "description": "Número de la habitación"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "individual_1_bed",
+              "individual_2_beds",
+              "individual_3_beds",
+              "suite_large_bed",
+              "suite_large_small_bed"
+            ],
+            "description": "Tipo de habitación"
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacidad máxima de personas"
+          },
+          "beds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["single", "double", "king"]
+            },
+            "description": "Tipos de camas en la habitación"
+          },
+          "pricePerNight": {
+            "type": "number",
+            "format": "float",
+            "description": "Precio por noche de la habitación"
+          },
+          "isAvailable": {
+            "type": "boolean",
+            "description": "Indica si la habitación está disponible"
+          }
+        },
+        "required": ["id", "hotelId", "roomNumber", "type", "capacity", "pricePerNight"]
+      },
+      "CreateRoomRequest": {
+        "type": "object",
+        "properties": {
+          "hotelId": {
+            "type": "string",
+            "description": "ID del hotel al que pertenece la habitación"
+          },
+          "roomNumber": {
+            "type": "string",
+            "description": "Número de la habitación"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "individual_1_bed",
+              "individual_2_beds",
+              "individual_3_beds",
+              "suite_large_bed",
+              "suite_large_small_bed"
+            ],
+            "description": "Tipo de habitación"
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacidad máxima de personas"
+          },
+          "beds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["single", "double", "king"]
+            },
+            "description": "Tipos de camas en la habitación"
+          },
+          "pricePerNight": {
+            "type": "number",
+            "format": "float",
+            "description": "Precio por noche de la habitación"
+          }
+        },
+        "required": ["hotelId", "roomNumber", "type", "capacity", "pricePerNight"]
+      },
+      "UpdateRoomRequest": {
+        "type": "object",
+        "properties": {
+          "roomNumber": {
+            "type": "string",
+            "description": "Número de la habitación",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "individual_1_bed",
+              "individual_2_beds",
+              "individual_3_beds",
+              "suite_large_bed",
+              "suite_large_small_bed"
+            ],
+            "description": "Tipo de habitación",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacidad máxima de personas",
+            "nullable": true
+          },
+          "beds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["single", "double", "king"]
+            },
+            "description": "Tipos de camas en la habitación",
+            "nullable": true
+          },
+          "pricePerNight": {
+            "type": "number",
+            "format": "float",
+            "description": "Precio por noche de la habitación",
+            "nullable": true
+          },
+          "isAvailable": {
+            "type": "boolean",
+            "description": "Indica si la habitación está disponible",
+            "nullable": true
+          }
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID único de la reserva"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID del usuario que realizó la reserva"
+          },
+          "roomId": {
+            "type": "string",
+            "description": "ID de la habitación reservada"
+          },
+          "checkInDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de entrada"
+          },
+          "checkOutDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de salida"
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "float",
+            "description": "Precio total de la reserva"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "confirmed", "cancelled"],
+            "description": "Estado de la reserva"
+          },
+          "numberOfGuests": {
+            "type": "integer",
+            "description": "Número de huéspedes en la reserva"
+          }
+        },
+        "required": ["id", "userId", "roomId", "checkInDate", "checkOutDate", "totalPrice", "status", "numberOfGuests"]
+      }
+    },
+    "parameters": {
+      "HotelId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID del hotel",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "RoomId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID de la habitación",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "BookingId": {
+        "name": "id",
+        "in": "path",
+        "description": "ID de la reserva",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Recurso no encontrado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Hotel no encontrado"
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Solicitud inválida",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Datos de entrada inválidos"
+                  },
+                  "errors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Error interno del servidor",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Algo salió mal en el servidor."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Error interno del servidor",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Error interno del servidor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Solicitud inválida",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Datos de entrada inválidos"
+                },
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["El nombre es requerido", "La ubicación es requerida"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

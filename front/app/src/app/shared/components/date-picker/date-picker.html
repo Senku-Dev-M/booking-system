@@ -1,0 +1,38 @@
+<div class="date-picker">
+  <div class="date-picker__field">
+    <label for="checkIn" class="date-picker__label">
+      <i class="fas fa-calendar-alt"></i>
+      Llegada
+    </label>
+    <input 
+      type="date" 
+      id="checkIn"
+      class="date-picker__input"
+      [min]="minDate()"
+      [value]="getFormattedDate(checkInDate())"
+      (change)="onCheckInChange($event)"
+      required>
+  </div>
+  
+  <div class="date-picker__field">
+    <label for="checkOut" class="date-picker__label">
+      <i class="fas fa-calendar-alt"></i>
+      Salida
+    </label>
+    <input 
+      type="date" 
+      id="checkOut"
+      class="date-picker__input"
+      [min]="minCheckOutDate()"
+      [value]="getFormattedDate(checkOutDate())"
+      (change)="onCheckOutChange($event)"
+      [disabled]="!checkInDate()"
+      required>
+  </div>
+  
+  @if (!isValidDateRange() && checkInDate() && checkOutDate()) {
+    <div class="date-picker__error">
+      La fecha de salida debe ser posterior a la fecha de entrada
+    </div>
+  }
+</div>

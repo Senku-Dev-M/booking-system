@@ -1,0 +1,84 @@
+<div class="search-bar">
+  <div class="search-bar__container">
+    <form class="search-form" (ngSubmit)="handleSearch()">
+      <div class="search-form__row">
+        <div class="search-form__field">
+          <label class="search-form__label">Destino</label>
+          <input 
+            type="text" 
+            class="search-form__input"
+            placeholder="¿A dónde quieres ir?"
+            [(ngModel)]="location"
+            name="location"
+          >
+        </div>
+        
+        <div class="search-form__field">
+          <label class="search-form__label">Check-in</label>
+          <input 
+            type="date" 
+            class="search-form__input"
+            [(ngModel)]="checkIn"
+            name="checkIn"
+          >
+        </div>
+        
+        <div class="search-form__field">
+          <label class="search-form__label">Check-out</label>
+          <input 
+            type="date" 
+            class="search-form__input"
+            [(ngModel)]="checkOut"
+            name="checkOut"
+          >
+        </div>
+        
+        <div class="search-form__field">
+          <label class="search-form__label">Huéspedes</label>
+          <select 
+            class="search-form__input"
+            [(ngModel)]="guests"
+            name="guests"
+          >
+            <option value="1">1 Huésped</option>
+            <option value="2">2 Huéspedes</option>
+            <option value="3">3 Huéspedes</option>
+            <option value="4">4 Huéspedes</option>
+            <option value="5">5+ Huéspedes</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="search-form__row">
+        <div class="search-form__field">
+          <label class="search-form__label">Precio mínimo</label>
+          <input 
+            type="number" 
+            class="search-form__input"
+            placeholder="Precio mínimo"
+            [(ngModel)]="minPrice"
+            name="minPrice"
+          >
+        </div>
+        
+        <div class="search-form__field">
+          <label class="search-form__label">Precio máximo</label>
+          <input 
+            type="number" 
+            class="search-form__input"
+            placeholder="Precio máximo"
+            [(ngModel)]="maxPrice"
+            name="maxPrice"
+          >
+        </div>
+        
+        <div class="search-form__field search-form__field--button">
+          <button type="submit" class="search-form__submit">
+            <i class="fas fa-search"></i>
+            Buscar Hoteles
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

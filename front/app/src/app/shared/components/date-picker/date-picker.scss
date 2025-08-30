@@ -1,0 +1,54 @@
+.date-picker {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  &__label {
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    i {
+      color: #666;
+    }
+  }
+  
+  &__input {
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    
+    &:disabled {
+      background-color: #f8f9fa;
+      cursor: not-allowed;
+    }
+  }
+  
+  &__error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .date-picker {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

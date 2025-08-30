@@ -1,0 +1,102 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <img src="/assets/logo.png" alt="Hotel Booking" class="header__logo-img">
+      <span class="header__logo-text">HotelBooking</span>
+    </div>
+    
+    <nav class="header__nav">
+      <a routerLink="/" class="header__nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/hotels" class="header__nav-link" routerLinkActive="active">Hoteles</a>
+      <a routerLink="/ofertas" class="header__nav-link" routerLinkActive="active">Ofertas</a>
+      <a routerLink="/contacto" class="header__nav-link" routerLinkActive="active">Contacto</a>
+    </nav>
+    
+    <div class="header__controls">
+      <div class="header__language">
+        <select (change)="changeLanguage($event)" [value]="currentLanguage()" class="header__select">
+          <option value="ES">Español</option>
+          <option value="EN">English</option>
+        </select>
+      </div>
+      
+      <div class="header__currency">
+        <select (change)="changeCurrency($event)" [value]="currentCurrency()" class="header__select">
+          <option value="BOB">BOB</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+      
+      @if (currentUser()) {
+        <div class="profile" [class.open]="isProfileMenuOpen()">
+          <button class="profile__button" (click)="toggleProfileMenu()" aria-label="Perfil">
+            <i class="fas fa-user-circle"></i>
+          </button>
+
+          @if (isProfileMenuOpen()) {
+            <div class="profile__menu">
+              <div class="profile__name">{{ currentUser()?.username }}</div>
+
+              <button class="profile__item" (click)="onSettings()">
+                <i class="fas fa-cog"></i>
+                Configuración
+              </button>
+
+              <button class="profile__item" (click)="onLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Cerrar sesión
+              </button>
+            </div>
+          }
+        </div>
+      } @else {
+        <button class="header__login-btn" (click)="openLoginModal()">
+          <i class="fas fa-user"></i>
+          Iniciar Sesión
+        </button>
+      }
+    </div>
+    
+    <button class="header__menu-toggle" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  @if (isLoginModalOpen()) {
+    <div class="login-modal-backdrop" (click)="onBackdropClick($event)">
+      <div class="login-modal-container">
+        <div class="login-modal-header">
+          <h2>Iniciar Sesión</h2>
+          <button class="login-modal-close" (click)="closeLoginModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="login-modal-content">
+          <app-login-form 
+            (onLoginSuccess)="onLoginSuccess($event)"
+            (onCloseModal)="closeLoginModal()"
+          ></app-login-form>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (isSuccessModalOpen()) {
+    <div class="success-modal-backdrop" (click)="onSuccessBackdropClick($event)">
+      <div class="success-modal-container">
+        <div class="success-modal-header">
+          <button class="success-modal-close" (click)="closeSuccessModal()" aria-label="Cerrar">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="success-modal-content">
+          <i class="fas fa-check-circle success-icon"></i>
+          <h3>Inicio de sesión exitoso</h3>
+          <p>¡Bienvenido, {{ currentUser()?.username }}!</p>
+        </div>
+      </div>
+    </div>
+  }
+</header>

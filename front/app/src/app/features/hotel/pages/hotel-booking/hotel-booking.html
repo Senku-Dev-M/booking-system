@@ -1,0 +1,154 @@
+<div class="hotel-booking">
+  @if (hotel(); as hotelData) {
+    <div class="hotel-header">
+      <div class="hotel-info">
+        <h1 class="hotel-name">{{ hotelData.name }}</h1>
+        <div class="hotel-rating">
+          <span class="rating-number">{{ hotelData.rating || 5 }}</span>
+          <div class="stars">
+            @for (star of getStars(); track $index) {
+              <i class="fas fa-star" [class.filled]="star"></i>
+            }
+          </div>
+        </div>
+        <div class="hotel-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ hotelData.location }}</span>
+        </div>
+        @if (hotelData.description) {
+          <div class="hotel-description">
+            <p>{{ hotelData.description }}</p>
+          </div>
+        }
+        
+        @if (hotelData.amenities && hotelData.amenities.length > 0) {
+          <div class="hotel-amenities">
+            <h3>Servicios y Comodidades</h3>
+            <div class="amenities-list">
+              @for (amenity of hotelData.amenities; track amenity.name) {
+                <span class="amenity-tag">
+                  <i class="{{ amenity.icon }}"></i>
+                  {{ amenity.name }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="booking-section">
+      <h2>Fecha de Reserva</h2>
+      <app-date-picker (onDateChange)="onDateChange($event)"></app-date-picker>
+    </div>
+
+    <div class="rooms-section">
+      <h2>Habitaciones Disponibles</h2>
+      <div class="rooms-list">
+        @for (roomGroup of groupedRooms(); track roomGroup.type) {
+          <div class="room-item">
+            <div class="room-info">
+              <h3 class="room-type">{{ getRoomTypeLabel(roomGroup.type) }}</h3>
+              <div class="room-details">
+                <span class="capacity">
+                  <i class="fas fa-users"></i>
+                  {{ roomGroup.capacity }} personas
+                </span>
+                <span class="beds">
+                  <i class="fas fa-bed"></i>
+                  {{ roomGroup.beds.join(', ') }}
+                </span>
+                <span class="available">
+                  <i class="fas fa-door-open"></i>
+                  {{ roomGroup.availableCount }} disponibles
+                </span>
+              </div>
+            </div>
+            <div class="room-price">
+              <span class="price">{{ roomGroup.pricePerNight | currency:'BOB' }} por noche</span>
+              <div class="room-counter">
+                <button class="counter-btn" 
+                        (click)="updateRoomCount(roomGroup.type, -1)"
+                        [disabled]="getSelectedCount(roomGroup.type) === 0">
+                </button>
+                <span class="count">{{ getSelectedCount(roomGroup.type) }}</span>
+                <button class="counter-btn" 
+                        (click)="updateRoomCount(roomGroup.type, 1)"
+                        [disabled]="getSelectedCount(roomGroup.type) >= roomGroup.availableCount">
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (hasSelectedRooms()) {
+      <div class="booking-summary">
+        <div class="selected-rooms">
+          <h3>Habitaciones Seleccionadas:</h3>
+          @for (selection of getSelectedRoomsSummary(); track selection.type) {
+            <div class="selected-room">
+              <div class="room-details">
+                <span class="room-name">{{ getRoomTypeLabel(selection.type) }} x {{ selection.count }} habitación{{ selection.count > 1 ? 'es' : '' }} </span>
+              </div>
+              <span class="room-total">{{ selection.totalPrice | currency:'BOB' }}</span>
+            </div>
+          }
+        </div>
+        
+
+        
+        @if (totalPrice() > 0) {
+          <div class="booking-info">
+            @if (dateRange().checkIn && dateRange().checkOut) {
+              <div class="nights-info">
+                <span class="label">Noches:</span>
+                <span class="value">{{ getNights() | number:'1.0-0' }}</span>
+              </div>
+            }
+            <div class="total-price">
+              <span class="label">Precio Total:</span>
+              <span class="price">{{ totalPrice() | currency:'BOB' }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="action-buttons">
+      <button class="back-btn" (click)="goBack()">Volver a Hoteles</button>
+      <button class="book-btn" 
+              [disabled]="!canBook() || isLoading()"
+              [class.auth-required]="!isUserAuthenticated()"
+              (click)="onBook()">
+        <i class="fas fa-calendar-check"></i>
+        @if (!isUserAuthenticated()) {
+          <i class="fas fa-lock"></i> Iniciar Sesión para Reservar
+        } @else {
+          {{ isLoading() ? 'Reservando...' : 'Reservar Habitaciones Seleccionadas' }}
+        }
+      </button>
+    </div>
+
+    @if (error()) {
+      <div class="error-message">
+        {{ error() }}
+      </div>
+    }
+  }
+
+  @if (isLoading() && !hotel()) {
+    <div class="loading">
+      <p>Cargando información del hotel...</p>
+    </div>
+  }
+
+  @if (showBookingModal()) {
+    <app-booking-confirmation-modal 
+      [bookingData]="getBookingData()"
+      (confirmed)="onBookingConfirmed($event)"
+      (cancelled)="onBookingCancelled()">
+    </app-booking-confirmation-modal>
+  }
+</div>

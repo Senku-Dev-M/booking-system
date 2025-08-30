@@ -1,0 +1,1203 @@
+{
+	"info": {
+		"_postman_id": "67e07989-a49f-42ac-8dde-b02591d54643",
+		"name": "Progra 5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36796795"
+	},
+	"item": [
+		{
+			"name": "Hotel",
+			"item": [
+				{
+					"name": "Crear un Hotel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hotel Mitru\",\r\n    \"location\": \"Tupiza\",\r\n    \"description\": \"Un hotel clásico en el centro de la ciudad.\",\r\n    \"amenities\": [\"Wi-Fi gratuito\", \"Desayuno buffet\", \"Estacionamiento\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/hotels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"hotels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Alpine Retreat Lodge\",\r\n    \"location\": \"Zurich\",\r\n    \"description\": \"Un refugio acogedor con vistas espectaculares a los Alpes.\",\r\n    \"amenities\": [\"Sauna\", \"Spa\", \"Chimenea en cada habitación\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/hotels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"hotels"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "217"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d9-u5V8bljaWTYctQVQwGw8IqaLaGk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:44:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"687d9b6258dbac5543f1168d\",\n    \"name\": \"Alpine Retreat Lodge\",\n    \"location\": \"Zurich\",\n    \"description\": \"Un refugio acogedor con vistas espectaculares a los Alpes.\",\n    \"amenities\": [\n        \"Sauna\",\n        \"Spa\",\n        \"Chimenea en cada habitación\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener Todos los Hoteles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/hotels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"hotels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/hotels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"hotels"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "351"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15f-Cl11cyhZZxjB3N7yJI3Vac5e4lg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:36:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d8d4084b1f7966bcb4fbe\",\n        \"name\": \"trivago\",\n        \"location\": \"cochabamba\",\n        \"description\": \"Hotel a las afueras de la ciudad\",\n        \"amenities\": [\n            \"string\"\n        ]\n    },\n    {\n        \"id\": \"687d997a58dbac5543f11680\",\n        \"name\": \"Hotel Mitru\",\n        \"location\": \"Tupiza\",\n        \"description\": \"Un hotel clásico en el centro de la ciudad.\",\n        \"amenities\": [\n            \"Wi-Fi gratuito\",\n            \"Desayuno buffet\",\n            \"Estacionamiento\"\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Obtener un Hotel por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"687d8d4084b1f7966bcb4fbe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"hotels",
+										"687d8d4084b1f7966bcb4fbe"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "146"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"92-twIdXd0cuuCGT5hDtUbMN2ycj5g\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:37:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"687d8d4084b1f7966bcb4fbe\",\n    \"name\": \"trivago\",\n    \"location\": \"cochabamba\",\n    \"description\": \"Hotel a las afueras de la ciudad\",\n    \"amenities\": [\n        \"string\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un Hotel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Un hotel clásico y renovado en el corazón de COchabamba, con nuevas comodidades.\",\r\n    \"amenities\": [\"Wi-Fi gratuito\", \"Desayuno buffet\", \"Estacionamiento\", \"Piscina en la azotea\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"687d8d4084b1f7966bcb4fbe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Un hotel clásico y renovado en el corazón de COchabamba, con nuevas comodidades.\",\r\n    \"amenities\": [\"Wi-Fi gratuito\", \"Desayuno buffet\", \"Estacionamiento\", \"Piscina en la azotea\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"hotels",
+										"687d8d4084b1f7966bcb4fbe"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "263"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"107-c3wO7AVwdwDNyGCbJ2q84v4daQg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:38:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"687d8d4084b1f7966bcb4fbe\",\n    \"name\": \"trivago\",\n    \"location\": \"cochabamba\",\n    \"description\": \"Un hotel clásico y renovado en el corazón de COchabamba, con nuevas comodidades.\",\n    \"amenities\": [\n        \"Wi-Fi gratuito\",\n        \"Desayuno buffet\",\n        \"Estacionamiento\",\n        \"Piscina en la azotea\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar un Hotel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"687d8d4084b1f7966bcb4fbe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/hotels/687d8d4084b1f7966bcb4fbe",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"hotels",
+										"687d8d4084b1f7966bcb4fbe"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:40:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "rooms",
+			"item": [
+				{
+					"name": "Crear una Habitación",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hotelId\": \"687d997a58dbac5543f11680\",\r\n    \"roomNumber\": \"101\",\r\n    \"type\": \"individual_1_bed\",\r\n    \"capacity\": 1,\r\n    \"beds\": [\"single\"],\r\n    \"pricePerNight\": 75.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"hotelId\": \"687d9b6258dbac5543f1168d\", \"roomNumber\": \"503\", \"type\": \"individual_1_bed\", \"capacity\": 1, \"beds\": [\"single\"], \"pricePerNight\": 60.00 }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-g4K78m4vylnhc7flHzhZyWFvQ9M\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:48:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"687d9c6758dbac5543f116cc\",\n    \"hotelId\": \"687d9b6258dbac5543f1168d\",\n    \"roomNumber\": \"503\",\n    \"type\": \"individual_1_bed\",\n    \"capacity\": 1,\n    \"beds\": [\n        \"single\"\n    ],\n    \"pricePerNight\": 60,\n    \"isAvailable\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener Habitaciones con Filtros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4145"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1031-2hddvj0+UkV1WJ7n5Jg+psZdTxE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:48:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d9abe58dbac5543f11687\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"101\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 75.5,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bd858dbac5543f11690\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"101\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 75,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9be358dbac5543f11693\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"102\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bea58dbac5543f11696\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"103\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9bf158dbac5543f11699\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"201\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 160,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bff58dbac5543f1169c\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"202\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 220,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0758dbac5543f1169f\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"301\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0e58dbac5543f116a2\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"302\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c1958dbac5543f116a5\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"A1\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 85,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c1f58dbac5543f116a8\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"A2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 130,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c2758dbac5543f116ab\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"B1\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 190,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c2c58dbac5543f116ae\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"B2\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 300,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c3158dbac5543f116b1\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"C1\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 350,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c3858dbac5543f116b4\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"1\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 100,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c3e58dbac5543f116b7\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 180,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4458dbac5543f116ba\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"3\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 250,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4958dbac5543f116bd\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"4\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 400,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4f58dbac5543f116c0\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"5\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 450,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c5558dbac5543f116c3\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"6\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 380,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c5c58dbac5543f116c6\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"501\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 90,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c6158dbac5543f116c9\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"502\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 150,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c6758dbac5543f116cc\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"503\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 60,\n        \"isAvailable\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Filtrar por número de personas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms?people=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "people",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms?people=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "people",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3220"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c94-0dxp00RTjvYyhxf3kn9kb/mOBmc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:49:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d9be358dbac5543f11693\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"102\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bea58dbac5543f11696\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"103\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9bf158dbac5543f11699\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"201\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 160,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bff58dbac5543f1169c\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"202\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 220,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0758dbac5543f1169f\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"301\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0e58dbac5543f116a2\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"302\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c1f58dbac5543f116a8\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"A2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 130,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c2758dbac5543f116ab\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"B1\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 190,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c2c58dbac5543f116ae\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"B2\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 300,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c3158dbac5543f116b1\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"C1\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 350,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c3e58dbac5543f116b7\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 180,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4458dbac5543f116ba\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"3\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 250,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4958dbac5543f116bd\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"4\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 400,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c4f58dbac5543f116c0\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"5\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 450,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c5558dbac5543f116c3\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"6\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 380,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9c5c58dbac5543f116c6\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"501\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 90,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c6158dbac5543f116c9\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"502\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 150,\n        \"isAvailable\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Filtrar por ubicación del hotel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms?location=Buenos%20Aires",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Buenos%20Aires"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms?location=Buenos%20Aires",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "Buenos%20Aires"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1337"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"539-uxQUW/mRw3UftLeBJoaj1Ofmu+8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:49:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d9bd858dbac5543f11690\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"101\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 75,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9be358dbac5543f11693\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"102\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bea58dbac5543f11696\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"103\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9bf158dbac5543f11699\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"201\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 160,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bff58dbac5543f1169c\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"202\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 220,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0758dbac5543f1169f\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"301\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0e58dbac5543f116a2\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"302\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Filtrar por rango de precios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms?minPrice=100&maxPrice=200",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "100"
+								},
+								{
+									"key": "maxPrice",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms?minPrice=100&maxPrice=200",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "minPrice",
+											"value": "100"
+										},
+										{
+											"key": "maxPrice",
+											"value": "200"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1505"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5e1-Go7/5wG494AYXQPSz4CAsm/cIiw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:50:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d9be358dbac5543f11693\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"102\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bea58dbac5543f11696\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"103\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 110,\n        \"isAvailable\": false\n    },\n    {\n        \"id\": \"687d9bf158dbac5543f11699\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"201\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 160,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c1f58dbac5543f116a8\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"A2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 130,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c2758dbac5543f116ab\",\n        \"hotelId\": \"687d997a58dbac5543f11680\",\n        \"roomNumber\": \"B1\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 190,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c3858dbac5543f116b4\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"1\",\n        \"type\": \"individual_1_bed\",\n        \"capacity\": 1,\n        \"beds\": [\n            \"single\"\n        ],\n        \"pricePerNight\": 100,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c3e58dbac5543f116b7\",\n        \"hotelId\": \"687d9b5b58dbac5543f1168b\",\n        \"roomNumber\": \"2\",\n        \"type\": \"individual_2_beds\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"double\"\n        ],\n        \"pricePerNight\": 180,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c6158dbac5543f116c9\",\n        \"hotelId\": \"687d9b6258dbac5543f1168d\",\n        \"roomNumber\": \"502\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 150,\n        \"isAvailable\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Combinación de filtros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms?people=2&location=Buenos%20Aires&minPrice=150\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "people",
+									"value": "2"
+								},
+								{
+									"key": "location",
+									"value": "Buenos%20Aires"
+								},
+								{
+									"key": "minPrice",
+									"value": "150\n"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms?people=2&location=Buenos%20Aires&minPrice=150\n",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "people",
+											"value": "2"
+										},
+										{
+											"key": "location",
+											"value": "Buenos%20Aires"
+										},
+										{
+											"key": "minPrice",
+											"value": "150\n"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "777"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"309-by1I+Tix6TIAsJOn93U7Aqz94R0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:50:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"687d9bf158dbac5543f11699\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"201\",\n        \"type\": \"individual_3_beds\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"single\",\n            \"double\"\n        ],\n        \"pricePerNight\": 160,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9bff58dbac5543f1169c\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"202\",\n        \"type\": \"suite_large_bed\",\n        \"capacity\": 2,\n        \"beds\": [\n            \"king\"\n        ],\n        \"pricePerNight\": 220,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0758dbac5543f1169f\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"301\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": true\n    },\n    {\n        \"id\": \"687d9c0e58dbac5543f116a2\",\n        \"hotelId\": \"687d9b5558dbac5543f11689\",\n        \"roomNumber\": \"302\",\n        \"type\": \"suite_large_small_bed\",\n        \"capacity\": 3,\n        \"beds\": [\n            \"king\",\n            \"single\"\n        ],\n        \"pricePerNight\": 280,\n        \"isAvailable\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Eliminar una Habitación",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms/687d9c6758dbac5543f116cc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms",
+								"687d9c6758dbac5543f116cc"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms/687d9c6758dbac5543f116cc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms",
+										"687d9c6758dbac5543f116cc"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:52:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Actualizar una Habitación",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pricePerNight\": 85.00,\r\n    \"isAvailable\": false,\r\n    \"roomNumber\": \"101A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/rooms/687d9c6158dbac5543f116c9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"rooms",
+								"687d9c6158dbac5543f116c9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pricePerNight\": 85.00,\r\n    \"isAvailable\": false,\r\n    \"roomNumber\": \"101A\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/rooms/687d9c6158dbac5543f116c9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"rooms",
+										"687d9c6158dbac5543f116c9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-UIwY3MeVB4X1ngYkkCn391tolYU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 01:53:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"687d9c6158dbac5543f116c9\",\n    \"hotelId\": \"687d9b6258dbac5543f1168d\",\n    \"roomNumber\": \"101A\",\n    \"type\": \"suite_large_bed\",\n    \"capacity\": 2,\n    \"beds\": [\n        \"king\"\n    ],\n    \"pricePerNight\": 85,\n    \"isAvailable\": false\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

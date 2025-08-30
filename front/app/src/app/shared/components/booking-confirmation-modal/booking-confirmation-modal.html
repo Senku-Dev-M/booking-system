@@ -1,0 +1,68 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="booking-modal">
+      <h1 class="booking-title">Detalles de la Reserva</h1>
+      
+      <div class="booking-date-section">
+        <div class="date-container">
+          <div class="date-header">Fecha de Reserva</div>
+          <div class="date-content">
+            <div class="date-item">
+              <i class="fas fa-plane-arrival"></i>
+              <span class="date-label">Llegada</span>
+              <span class="date-value">{{ bookingData.checkInDate | date:'short' }}</span>
+            </div>
+            <div class="date-separator"></div>
+            <div class="date-item">
+              <i class="fas fa-plane-departure"></i>
+              <span class="date-label">Salida</span>
+              <span class="date-value">{{ bookingData.checkOutDate | date:'short' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-for-section">
+        <span class="booking-for-label">Reserva para:</span>
+        <span class="booking-for-name">{{ bookingData.userName }}</span>
+      </div>
+
+      <div class="contact-section">
+        <div class="input-group">
+          <input type="email" 
+                 class="contact-input" 
+                 placeholder="Correo Electrónico" 
+                 [value]="contactInfo().email"
+                 (input)="updateEmail($event)"
+                 required>
+        </div>
+        <div class="input-group">
+          <input type="tel" 
+                 class="contact-input" 
+                 placeholder="Número de Teléfono" 
+                 [value]="contactInfo().phone"
+                 (input)="updatePhone($event)"
+                 required>
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h3 class="policy-title">Política de Cancelación de Reservas</h3>
+        <div class="policy-content">
+          <p>- Una reserva puede ser cancelada tres días antes de la fecha de reserva.</p>
+          <p>- Si intentas cancelar una reserva existente y la fecha de cancelación ha expirado, la transacción será rechazada y tendrás que cubrir todos los pagos.</p>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="cancel-btn" (click)="onCancel()">Cancelar</button>
+        <button class="confirm-btn" 
+                (click)="onConfirm()"
+                [disabled]="!isFormValid()">
+          <span>Confirmar Reserva</span>
+          <i class="fas fa-calendar-check"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

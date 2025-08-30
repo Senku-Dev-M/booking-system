@@ -1,0 +1,47 @@
+<div class="hotel-list-page">  
+  <section class="results-section">
+    <div class="container">
+      @if (hasSearched()) {
+        <div class="results-header">
+          <h2>Hoteles encontrados</h2>
+          <p class="results-count">{{ resultsCount() }} hoteles disponibles</p>
+        </div>
+      } @else {
+        <div class="results-header">
+          <h1>Todos nuestros hoteles</h1>
+          <p>Explora nuestra selección completa</p>
+        </div>
+      }
+      
+      @if (isLoading()) {
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Cargando hoteles...</p>
+        </div>
+      } @else if (error()) {
+        <div class="error">
+          <p>{{ error() }}</p>
+          <button class="btn btn--primary" (click)="retryLoad()">
+            Reintentar
+          </button>
+        </div>
+      } @else {
+        @if (filteredHotels().length > 0) {
+          <div class="hotels-grid">
+            @for (hotel of filteredHotels(); track hotel._id || $index) {
+              <app-hotel-card 
+                [hotel]="hotel"
+                (onReserve)="handleReserve($event)">
+              </app-hotel-card>
+            }
+          </div>
+        } @else {
+          <div class="no-results">
+            <h3>No se encontraron hoteles</h3>
+            <p>Intenta ajustar tus filtros de búsqueda</p>
+          </div>
+        }
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,28 @@
+<div class="hotel-card">
+  <div class="hotel-card__image">
+    <img [src]="hotel().image" [alt]="hotel().name" class="hotel-card__img">
+  </div>
+  
+  <div class="hotel-card__content">
+    <h3 class="hotel-card__name">{{ hotel().name }}</h3>
+    <div class="hotel-card__stars hotel-card__stars--below">
+      @for (star of getStars(); track $index) {
+        <i class="fas fa-star" [class.filled]="star"></i>
+      }
+    </div>
+    <p class="hotel-card__location">
+      <i class="fas fa-map-marker-alt"></i>
+      {{ hotel().location }}
+    </p>
+    
+    <div class="hotel-card__footer">
+      <div class="hotel-card__actions">
+        <button 
+          class="hotel-card__btn hotel-card__btn--primary"
+          (click)="handleReserve()">
+          Reservar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

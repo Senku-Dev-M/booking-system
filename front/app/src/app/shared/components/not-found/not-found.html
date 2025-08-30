@@ -1,0 +1,27 @@
+<div class="not-found-page">
+  <div class="not-found-container">
+    <div class="not-found-content">
+      <div class="error-illustration">
+        <div class="error-number">404</div>
+      </div>
+
+      <div class="error-text">
+        <h1>¡Oops! Página no encontrada</h1>
+        <p>La página que estás buscando no existe o ha sido movida.</p>
+        <p>Verifica la URL o regresa a la página principal.</p>
+      </div>
+
+      <div class="error-actions">
+        <button class="btn-primary" (click)="goHome()">
+          <i class="fas fa-home"></i>
+          Ir al Inicio
+        </button>
+
+        <button class="btn-secondary" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Volver Atrás
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

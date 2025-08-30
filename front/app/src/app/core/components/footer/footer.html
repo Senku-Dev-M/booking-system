@@ -1,0 +1,52 @@
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__content">
+      <div class="footer__section">
+        <h3 class="footer__title">HotelBooking</h3>
+        <p class="footer__description">
+          Tu plataforma de confianza para encontrar los mejores hoteles al mejor precio.
+        </p>
+        <div class="footer__social">
+          @for (link of socialLinks(); track link.name) {
+            <a [href]="link.url" class="footer__social-link" [attr.aria-label]="link.name">
+              <i [class]="link.icon"></i>
+            </a>
+          }
+        </div>
+      </div>
+      
+      <div class="footer__section">
+        <h4 class="footer__subtitle">Servicios</h4>
+        <ul class="footer__list">
+          <li><a href="#" class="footer__link">Búsqueda de Hoteles</a></li>
+          <li><a href="#" class="footer__link">Reservas</a></li>
+          <li><a href="#" class="footer__link">Ofertas Especiales</a></li>
+          <li><a href="#" class="footer__link">Programa de Lealtad</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer__section">
+        <h4 class="footer__subtitle">Soporte</h4>
+        <ul class="footer__list">
+          <li><a href="#" class="footer__link">Centro de Ayuda</a></li>
+          <li><a href="#" class="footer__link">Contacto</a></li>
+          <li><a href="#" class="footer__link">Términos y Condiciones</a></li>
+          <li><a href="#" class="footer__link">Política de Privacidad</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer__section">
+        <h4 class="footer__subtitle">Contacto</h4>
+        <div class="footer__contact">
+          <p><i class="fas fa-phone"></i> +591 123 456 789</p>
+          <p><i class="fas fa-envelope"></i> info@hotelbooking.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> La Paz, Bolivia</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer__bottom">
+      <p>&copy; {{ currentYear() }} HotelBooking. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

@@ -7,15 +7,30 @@ import { Booking, CreateBookingRequest } from '../../../shared/models/booking-mo
 @Injectable({
   providedIn: 'root'
 })
-export class BookingService {
+export class ReservationService {
   private baseUrl = 'http://localhost:3000/api/v1/bookings';
 
   constructor(private http: HttpClient) {}
 
-  createBooking(bookingData: CreateBookingRequest): Observable<Booking> {
+  createReservation(bookingData: CreateBookingRequest): Observable<Booking> {
     return this.http.post<Booking>(this.baseUrl, bookingData).pipe(
       catchError(this.handleError)
     );
+  }
+
+  cancelReservation(id: string): Observable<Booking> {
+    return this.http.patch<Booking>(`${this.baseUrl}/${id}/cancel`, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Legacy methods kept for backward compatibility
+  createBooking(bookingData: CreateBookingRequest): Observable<Booking> {
+    return this.createReservation(bookingData);
+  }
+
+  cancelBooking(id: string): Observable<Booking> {
+    return this.cancelReservation(id);
   }
 
   getBookings(): Observable<Booking[]> {
@@ -36,12 +51,6 @@ export class BookingService {
     );
   }
 
-  cancelBooking(id: string): Observable<Booking> {
-    return this.http.patch<Booking>(`${this.baseUrl}/${id}/cancel`, {}).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   canCancelBooking(checkInDate: string): boolean {
     const checkIn = new Date(checkInDate);
     const today = new Date();
@@ -51,17 +60,18 @@ export class BookingService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('Error en BookingService:', error);
-    
-    let errorMessage = 'Error en la reserva';
-    if (error.status === 400) {
-      errorMessage = 'No se puede cancelar: La fecha de cancelación ha expirado (debe ser 3 días antes)';
-    } else if (error.status === 404) {
-      errorMessage = 'Reserva no encontrada';
-    } else if (error.status === 500) {
-      errorMessage = 'Error en el servidor, por favor intente más tarde';
-    }
-    
+    console.error('Reservation API error:', error);
+
+    const errorMessage =
+      error.error?.message ||
+      (error.status === 400
+        ? 'Solicitud inválida'
+        : error.status === 404
+        ? 'Reserva no encontrada'
+        : error.status === 0
+        ? 'Error de red, intente más tarde'
+        : 'Error en el servidor, por favor intente más tarde');
+
     return throwError(() => new Error(errorMessage));
   }
 }

@@ -1,0 +1,51 @@
+<div class="create-booking">
+  <h2>Crear Reserva</h2>
+
+  <form (ngSubmit)="submit()" #form="ngForm">
+    <label>
+      ID Usuario
+      <input name="userId" [(ngModel)]="booking.userId" required />
+    </label>
+    <label>
+      ID Hotel
+      <input name="hotelId" [(ngModel)]="booking.hotelId" required />
+    </label>
+    <label>
+      ID Habitación
+      <input name="roomId" [(ngModel)]="booking.roomId" required />
+    </label>
+    <label>
+      Fecha de entrada
+      <input type="date" name="checkInDate" [(ngModel)]="booking.checkInDate" required />
+    </label>
+    <label>
+      Fecha de salida
+      <input type="date" name="checkOutDate" [(ngModel)]="booking.checkOutDate" required />
+    </label>
+    <label>
+      Huéspedes
+      <input type="number" name="numberOfGuests" [(ngModel)]="booking.numberOfGuests" min="1" required />
+    </label>
+    <label>
+      Precio total
+      <input type="number" name="totalPrice" [(ngModel)]="booking.totalPrice" min="0" required />
+    </label>
+    <label>
+      Email de contacto
+      <input type="email" name="contactEmail" [(ngModel)]="booking.contactEmail" required />
+    </label>
+    <label>
+      Teléfono de contacto
+      <input name="contactPhone" [(ngModel)]="booking.contactPhone" required />
+    </label>
+
+    <button type="submit" [disabled]="form.invalid || isLoading()">Reservar</button>
+  </form>
+
+  <div *ngIf="message() && created()" class="success-message">
+    <p>{{ message() }}</p>
+    <p>ID de Reserva: {{ created()!.id }}</p>
+  </div>
+
+  <div *ngIf="error()" class="error-message">{{ error() }}</div>
+</div>

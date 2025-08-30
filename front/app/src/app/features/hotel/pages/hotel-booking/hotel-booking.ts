@@ -8,7 +8,7 @@ import { Room, BedType } from '../../../../shared/models/room-model';
 import { CreateBookingRequest } from '../../../../shared/models/booking-model';
 import { HotelService } from '../../services/hotel-service';
 import { RoomService } from '../../services/room-service';
-import { BookingService } from '../../services/booking-service';
+import { ReservationService } from '../../services/reservation-service';
 import { DatePickerComponent, DateRange } from '../../../../shared/components/date-picker/date-picker';
 import { AuthService } from '../../../../core/services/auth-service';
 import { BookingConfirmationModalComponent, BookingData, ContactInfo } from '../../../../shared/components/booking-confirmation-modal/booking-confirmation-modal';
@@ -170,7 +170,7 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
     private router: Router,
     private hotelService: HotelService,
     private roomService: RoomService,
-    private bookingService: BookingService,
+    private reservationService: ReservationService,
     private authService: AuthService
   ) {}
 
@@ -262,7 +262,7 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
     };
 
     this.isLoading.set(true);
-    this.bookingService.createBooking(bookingData)
+    this.reservationService.createReservation(bookingData)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {

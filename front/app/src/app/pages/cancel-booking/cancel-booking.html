@@ -1,0 +1,16 @@
+<div class="cancel-booking">
+  <h2>Cancelar Reserva</h2>
+
+  <div *ngIf="message(); else showForm" class="success-message">
+    {{ message() }}
+  </div>
+
+  <ng-template #showForm>
+    <div *ngIf="error()" class="error-message">
+      {{ error() }}
+    </div>
+
+    <p *ngIf="bookingId()">ID de Reserva: {{ bookingId() }}</p>
+    <button (click)="cancelBooking()" [disabled]="isLoading()">Cancelar Reserva</button>
+  </ng-template>
+</div>

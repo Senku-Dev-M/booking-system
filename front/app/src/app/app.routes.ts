@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home';
 import { HotelListPageComponent } from './features/hotel/pages/hotel-list-page/hotel-list-page';
 import { HotelBookingComponent } from './features/hotel/pages/hotel-booking/hotel-booking';
+import { CancelBookingComponent } from './pages/cancel-booking/cancel-booking';
+import { CreateBookingComponent } from './pages/create-booking/create-booking';
 import { NotFoundComponent } from './shared/components/not-found/not-found';
 import { AuthGuard } from './core/guards/auth-guard';
 import { CanDeactivateGuard } from './core/guards/can-deactivate-guard';
@@ -21,15 +23,27 @@ export const routes: Routes = [
     component: HotelListPageComponent,
     title: 'Hoteles - Hotel Booking'
   },
-  { 
-    path: 'hotels/:hotelId/booking', 
+  {
+    path: 'hotels/:hotelId/booking',
     component: HotelBookingComponent,
     canActivate: [AuthGuard],
     canDeactivate: [CanDeactivateGuard],
     title: 'Reservar Hotel - Hotel Booking'
   },
-  { 
-    path: '404', 
+  {
+    path: 'bookings/:bookingId/cancel',
+    component: CancelBookingComponent,
+    canActivate: [AuthGuard],
+    title: 'Cancelar Reserva - Hotel Booking'
+  },
+  {
+    path: 'bookings/new',
+    component: CreateBookingComponent,
+    canActivate: [AuthGuard],
+    title: 'Crear Reserva - Hotel Booking'
+  },
+  {
+    path: '404',
     component: NotFoundComponent,
     title: 'Página no encontrada - Hotel Booking'
   },

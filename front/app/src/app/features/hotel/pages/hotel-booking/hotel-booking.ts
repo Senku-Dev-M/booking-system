@@ -5,19 +5,33 @@ import { Subject, takeUntil, forkJoin } from 'rxjs';
 
 import { Hotel } from '../../../../shared/models/hotel-model';
 import { Room, BedType } from '../../../../shared/models/room-model';
-import { CreateBookingRequest } from '../../../../shared/models/booking-model';
+import { Booking, CreateBookingRequest } from '../../../../shared/models/booking-model';
 import { HotelService } from '../../services/hotel-service';
 import { RoomService } from '../../services/room-service';
-import { BookingService } from '../../services/booking-service';
+import { ReservationService } from '../../services/reservation-service';
 import { DatePickerComponent, DateRange } from '../../../../shared/components/date-picker/date-picker';
 import { AuthService } from '../../../../core/services/auth-service';
-import { BookingConfirmationModalComponent, BookingData, ContactInfo } from '../../../../shared/components/booking-confirmation-modal/booking-confirmation-modal';
+import {
+  BookingConfirmationModalComponent,
+  BookingData,
+  ContactInfo
+} from '../../../../shared/components/booking-confirmation-modal/booking-confirmation-modal';
+import { ReservationDetailsModalComponent } from '../../../../shared/components/reservation-details-modal/reservation-details-modal';
+import { CancellationConfirmationModalComponent } from '../../../../shared/components/cancellation-confirmation-modal/cancellation-confirmation-modal';
+import { ReservationErrorModalComponent } from '../../../../shared/components/reservation-error-modal/reservation-error-modal';
 import { CanComponentDeactivate } from '../../../../core/guards/can-deactivate-guard';
 
 @Component({
   selector: 'app-hotel-booking',
   standalone: true,
-  imports: [CommonModule, DatePickerComponent, BookingConfirmationModalComponent],
+  imports: [
+    CommonModule,
+    DatePickerComponent,
+    BookingConfirmationModalComponent,
+    ReservationDetailsModalComponent,
+    CancellationConfirmationModalComponent,
+    ReservationErrorModalComponent
+  ],
   templateUrl: './hotel-booking.html',
   styleUrl: './hotel-booking.scss'
 })
@@ -31,6 +45,10 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
   isLoading = signal(false);
   error = signal<string | null>(null);
   showBookingModal = signal(false);
+  createdBooking = signal<Booking | null>(null);
+  showReservationDetails = signal(false);
+  showCancellationConfirmation = signal(false);
+  errorMessage = signal<string | null>(null);
   
   private destroy$ = new Subject<void>();
   private readonly BOOKING_STATE_KEY = 'booking_state';
@@ -170,7 +188,7 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
     private router: Router,
     private hotelService: HotelService,
     private roomService: RoomService,
-    private bookingService: BookingService,
+    private reservationService: ReservationService,
     private authService: AuthService
   ) {}
 
@@ -247,34 +265,74 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
     const dates = this.dateRange();
     const selectedRooms = this.selectedRooms();
     const hotel = this.hotel();
+    const user = this.authService.getCurrentUser();
 
-    if (!hotel || !dates.checkIn || !dates.checkOut || selectedRooms.size === 0) return;
+    if (!hotel || !dates.checkIn || !dates.checkOut || selectedRooms.size === 0 || !user || !contactInfo) {
+      return;
+    }
 
     const firstRoomType = Array.from(selectedRooms.keys())[0];
     const roomGroup = this.groupedRooms().find(g => g.type === firstRoomType);
     if (!roomGroup || !roomGroup.rooms.length) return;
 
     const bookingData: CreateBookingRequest = {
+      userId: user.id,
+      hotelId: hotel._id || hotel.id,
       roomId: roomGroup.rooms[0].id,
       checkInDate: dates.checkIn.toISOString().split('T')[0],
       checkOutDate: dates.checkOut.toISOString().split('T')[0],
-      numberOfGuests: this.getTotalCapacity()
+      numberOfGuests: this.getTotalCapacity(),
+      totalPrice: this.totalPrice(),
+      contactEmail: contactInfo.email,
+      contactPhone: contactInfo.phone
     };
 
     this.isLoading.set(true);
-    this.bookingService.createBooking(bookingData)
+    this.reservationService
+      .createReservation(bookingData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (booking) => {
+          this.isLoading.set(false);
+          this.clearBookingState();
+          this.createdBooking.set(booking);
+          this.showReservationDetails.set(true);
+        },
+        error: (error) => {
+          this.isLoading.set(false);
+          this.errorMessage.set(error.message);
+        }
+      });
+  }
+
+  onReservationDetailClose() {
+    this.showReservationDetails.set(false);
+    this.createdBooking.set(null);
+    this.router.navigate(['/hotels']);
+  }
+
+  onCancelReservation(id: string) {
+    this.reservationService
+      .cancelReservation(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.isLoading.set(false);
-          this.clearBookingState();
-          this.router.navigate(['/hotels']);
+          this.showReservationDetails.set(false);
+          this.showCancellationConfirmation.set(true);
         },
         error: (error) => {
-          this.error.set(error.message);
-          this.isLoading.set(false);
+          this.errorMessage.set(error.message);
         }
       });
+  }
+
+  onCancellationConfirmClose() {
+    this.showCancellationConfirmation.set(false);
+    this.router.navigate(['/hotels']);
+  }
+
+  onErrorClose() {
+    this.errorMessage.set(null);
   }
 
   goBack() {

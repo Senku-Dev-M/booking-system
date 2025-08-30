@@ -1,0 +1,18 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="details-modal">
+      <h2 class="title">Reserva Confirmada</h2>
+      <div class="details">
+        <p><strong>ID:</strong> {{ reservation.id }}</p>
+        <p><strong>Check-in:</strong> {{ reservation.checkInDate | date }}</p>
+        <p><strong>Check-out:</strong> {{ reservation.checkOutDate | date }}</p>
+        <p><strong>Huéspedes:</strong> {{ reservation.numberOfGuests }}</p>
+        <p><strong>Total:</strong> {{ reservation.totalPrice | currency:'BOB' }}</p>
+      </div>
+      <div class="actions">
+        <button class="cancel-btn" (click)="onCancel()">Cancelar Reserva</button>
+        <button class="close-btn" (click)="onClose()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

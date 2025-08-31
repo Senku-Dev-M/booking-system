@@ -31,8 +31,10 @@ export class ReservationService {
    * Retrieves all reservations
    */
   getReservations(): Observable<Booking[]> {
+    const token = this.authService.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .get<Booking[]>(this.baseUrl)
+      .get<Booking[]>(this.baseUrl, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -40,8 +42,10 @@ export class ReservationService {
    * Retrieves reservations for a specific user
    */
   getUserReservations(userId: string): Observable<Booking[]> {
+    const token = this.authService.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .get<Booking[]>(`${this.baseUrl}?userId=${userId}`)
+      .get<Booking[]>(`${this.baseUrl}?userId=${userId}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -49,8 +53,10 @@ export class ReservationService {
    * Retrieves a single reservation by id
    */
   getReservationById(id: string): Observable<Booking> {
+    const token = this.authService.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .get<Booking>(`${this.baseUrl}/${id}`)
+      .get<Booking>(`${this.baseUrl}/${id}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -58,8 +64,10 @@ export class ReservationService {
    * Cancels an existing reservation
    */
   cancelReservation(id: string): Observable<Booking> {
+    const token = this.authService.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .patch<Booking>(`${this.baseUrl}/${id}/cancel`, {})
+      .patch<Booking>(`${this.baseUrl}/${id}/cancel`, {}, { headers })
       .pipe(catchError(this.handleError));
   }
 

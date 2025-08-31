@@ -15,19 +15,23 @@
         
         <div class="search-form__field">
           <label class="search-form__label">Check-in</label>
-          <input 
-            type="date" 
+          <input
+            type="text"
             class="search-form__input"
+            #checkInInput
+            placeholder="Selecciona fecha"
             [(ngModel)]="checkIn"
             name="checkIn"
           >
         </div>
-        
+
         <div class="search-form__field">
           <label class="search-form__label">Check-out</label>
-          <input 
-            type="date" 
+          <input
+            type="text"
             class="search-form__input"
+            #checkOutInput
+            placeholder="Selecciona fecha"
             [(ngModel)]="checkOut"
             name="checkOut"
           >

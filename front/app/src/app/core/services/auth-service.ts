@@ -24,7 +24,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly TOKEN_KEY = 'auth_token';
+  private readonly TOKEN_KEY = 'access_token';
   private readonly USER_KEY = 'auth_user';
   private readonly EXPIRY_KEY = 'auth_expiry';
   private readonly TOKEN_DURATION = 60 * 60 * 1000

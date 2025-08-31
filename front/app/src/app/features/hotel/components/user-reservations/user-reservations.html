@@ -1,4 +1,8 @@
 <div class="reservations" *ngIf="!isLoading(); else loading">
+  <div class="reservations__message" *ngIf="successMessage()">
+    {{ successMessage() }}
+  </div>
+  <div class="reservations__error" *ngIf="error()">{{ error() }}</div>
   <ng-container *ngIf="reservations().length; else noData">
     <div class="reservation-card" *ngFor="let r of reservations()">
       <div class="reservation-card__info">

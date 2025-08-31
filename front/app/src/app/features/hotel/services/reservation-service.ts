@@ -45,7 +45,9 @@ export class ReservationService {
     const token = this.authService.getToken();
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .get<Booking[]>(`${this.baseUrl}?userId=${userId}`, { headers })
+      .get<Booking[]>(`${this.baseUrl}?userId=${userId}&isActive=true`, {
+        headers
+      })
       .pipe(catchError(this.handleError));
   }
 

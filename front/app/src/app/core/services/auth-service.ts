@@ -119,12 +119,7 @@ export class AuthService {
     if (!this.isBrowser()) {
       return null;
     }
-    
-    const expiry = localStorage.getItem(this.EXPIRY_KEY);
-    if (expiry && Date.now() >= parseInt(expiry, 10)) {
-      this.logout();
-      return null;
-    }
+
     return localStorage.getItem(this.TOKEN_KEY);
   }
 

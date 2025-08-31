@@ -255,7 +255,7 @@ export class HotelBookingComponent implements OnInit, OnDestroy, CanComponentDea
   onBook() {
     if (!this.authService.isLoggedIn()) {
       this.saveBookingState();
-      this.error.set('Por favor, inicia sesión para continuar con tu reserva.');
+      this.errorMessage.set('Por favor, inicia sesión para continuar con tu reserva.');
       return;
     }
     this.showBookingModal.set(true);

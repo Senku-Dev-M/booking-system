@@ -8,18 +8,18 @@ import { Booking, CreateBookingRequest } from '../../../shared/models/booking-mo
   providedIn: 'root'
 })
 export class ReservationService {
-  private baseUrl = 'http://localhost:3000/api/v1/bookings';
+  private apiUrl = 'http://localhost:3000/api/v1';
 
   constructor(private http: HttpClient) {}
 
   createReservation(bookingData: CreateBookingRequest): Observable<Booking> {
-    return this.http.post<Booking>(this.baseUrl, bookingData).pipe(
+    return this.http.post<Booking>(`${this.apiUrl}/bookings`, bookingData).pipe(
       catchError(this.handleError)
     );
   }
 
   cancelReservation(id: string): Observable<Booking> {
-    return this.http.patch<Booking>(`${this.baseUrl}/${id}/cancel`, {}).pipe(
+    return this.http.patch<Booking>(`${this.apiUrl}/bookings/${id}/cancel`, {}).pipe(
       catchError(this.handleError)
     );
   }
@@ -34,19 +34,19 @@ export class ReservationService {
   }
 
   getBookings(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.baseUrl).pipe(
+    return this.http.get<Booking[]>(`${this.apiUrl}/bookings`).pipe(
       catchError(this.handleError)
     );
   }
 
   getUserBookings(userId: string): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.baseUrl}?userId=${userId}`).pipe(
+    return this.http.get<Booking[]>(`${this.apiUrl}/bookings?userId=${userId}`).pipe(
       catchError(this.handleError)
     );
   }
 
   getBookingById(id: string): Observable<Booking> {
-    return this.http.get<Booking>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.get<Booking>(`${this.apiUrl}/bookings/${id}`).pipe(
       catchError(this.handleError)
     );
   }

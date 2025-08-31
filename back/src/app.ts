@@ -11,6 +11,7 @@ import { loggerMiddleware } from './interfaces/http/middlewares/loggerMiddleware
 import hotelRoutes from './interfaces/http/routes/hotelRoutes';
 import roomRoutes from './interfaces/http/routes/roomRoutes';
 import authRoutes from './interfaces/http/routes/authRoutes';
+import bookingRoutes from './interfaces/http/routes/bookingRoutes';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/hotels', hotelRoutes);
 app.use('/api/v1/rooms', roomRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
 
 app.use(expressErrorHandler);
 

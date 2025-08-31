@@ -78,6 +78,8 @@ export class ReservationService {
     if (error.status === 400) {
       errorMessage =
         'No se puede cancelar: la fecha de cancelación ha expirado (debe ser 3 días antes)';
+    } else if (error.status === 401) {
+      errorMessage = 'No autorizado. Por favor, inicia sesión.';
     } else if (error.status === 404) {
       errorMessage = 'Reserva no encontrada';
     } else if (error.status === 500) {

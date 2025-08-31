@@ -15,6 +15,7 @@ export class UserReservationsComponent implements OnInit {
   reservations = signal<Booking[]>([]);
   isLoading = signal(false);
   error = signal('');
+  successMessage = signal('');
 
   constructor(
     private reservationService: ReservationService,
@@ -62,6 +63,7 @@ export class UserReservationsComponent implements OnInit {
         this.reservations.update((list) =>
           list.filter((r) => r.id !== reservation.id)
         );
+        this.successMessage.set('Reserva cancelada exitosamente.');
       },
       error: (err) => this.error.set(err.message)
     });

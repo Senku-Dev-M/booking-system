@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header__container">
+  <div class="header__container container">
     <div class="header__logo">
       <img src="/assets/logo.png" alt="Hotel Booking" class="header__logo-img">
       <span class="header__logo-text">HotelBooking</span>
@@ -55,7 +55,7 @@
           }
         </div>
       } @else {
-        <button class="header__login-btn" (click)="openLoginModal()">
+        <button class="btn btn-secondary" (click)="openLoginModal()">
           <i class="fas fa-user"></i>
           Iniciar Sesión
         </button>
@@ -70,8 +70,8 @@
   </div>
 
   @if (isLoginModalOpen()) {
-    <div class="login-modal-backdrop" (click)="onBackdropClick($event)">
-      <div class="login-modal-container">
+    <div class="modal-backdrop" (click)="onBackdropClick($event)">
+      <div class="modal-container login-modal">
         <div class="login-modal-header">
           <h2>Iniciar Sesión</h2>
           <button class="login-modal-close" (click)="closeLoginModal()">
@@ -89,8 +89,8 @@
   }
 
   @if (isSuccessModalOpen()) {
-    <div class="success-modal-backdrop" (click)="onSuccessBackdropClick($event)">
-      <div class="success-modal-container">
+    <div class="modal-backdrop" (click)="onSuccessBackdropClick($event)">
+      <div class="modal-container success-modal">
         <div class="success-modal-header">
           <button class="success-modal-close" (click)="closeSuccessModal()" aria-label="Cerrar">
             <i class="fas fa-times"></i>
@@ -106,8 +106,8 @@
   }
 
   @if (isReservationsModalOpen()) {
-    <div class="reservations-modal-backdrop" (click)="onReservationsBackdropClick($event)">
-      <div class="reservations-modal-container">
+    <div class="modal-backdrop" (click)="onReservationsBackdropClick($event)">
+      <div class="modal-container reservations-modal">
         <div class="reservations-modal-header">
           <h2>Mis Reservas</h2>
           <button class="reservations-modal-close" (click)="closeReservationsModal()">

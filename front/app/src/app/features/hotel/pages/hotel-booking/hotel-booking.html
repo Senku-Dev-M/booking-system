@@ -1,4 +1,4 @@
-<div class="hotel-booking">
+<div class="hotel-booking container">
   @if (hotel(); as hotelData) {
     <div class="hotel-header">
       <div class="hotel-info">
@@ -37,16 +37,16 @@
       </div>
     </div>
 
-    <div class="booking-section">
+    <div class="booking-section section card">
       <h2>Fecha de Reserva</h2>
       <app-date-picker (onDateChange)="onDateChange($event)"></app-date-picker>
     </div>
 
-    <div class="rooms-section">
+    <div class="rooms-section section card">
       <h2>Habitaciones Disponibles</h2>
       <div class="rooms-list">
         @for (roomGroup of groupedRooms(); track roomGroup.type) {
-          <div class="room-item">
+          <div class="room-item card">
             <div class="room-info">
               <h3 class="room-type">{{ getRoomTypeLabel(roomGroup.type) }}</h3>
               <div class="room-details">
@@ -84,7 +84,7 @@
     </div>
 
     @if (hasSelectedRooms()) {
-      <div class="booking-summary">
+      <div class="booking-summary card section">
         <div class="selected-rooms">
           <h3>Habitaciones Seleccionadas:</h3>
           @for (selection of getSelectedRoomsSummary(); track selection.type) {
@@ -117,10 +117,11 @@
     }
 
     <div class="action-buttons">
-      <button class="back-btn" (click)="goBack()">Volver a Hoteles</button>
-      <button class="book-btn" 
+      <button class="btn btn-outline" (click)="goBack()">Volver a Hoteles</button>
+      <button class="btn"
+              [class.btn-primary]="isUserAuthenticated()"
+              [class.btn-warning]="!isUserAuthenticated()"
               [disabled]="!canBook() || isLoading()"
-              [class.auth-required]="!isUserAuthenticated()"
               (click)="onBook()">
         <i class="fas fa-calendar-check"></i>
         @if (!isUserAuthenticated()) {
@@ -132,7 +133,7 @@
     </div>
 
     @if (error()) {
-      <div class="error-message">
+      <div class="alert alert-error">
         {{ error() }}
       </div>
     }

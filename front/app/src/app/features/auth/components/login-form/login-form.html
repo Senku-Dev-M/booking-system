@@ -1,7 +1,7 @@
 <div class="login-form-container">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
   <div class="form-group">
-    <label for="username" class="form-label">Usuario</label>
+    <label for="username">Usuario</label>
     <div class="input-wrapper">
       <input
         type="text"
@@ -17,7 +17,7 @@
     </span>
   </div>
   <div class="form-group">
-    <label for="password" class="form-label">Contraseña</label>
+    <label for="password">Contraseña</label>
     <div class="input-wrapper">
       <input
         [type]="showPassword() ? 'text' : 'password'"
@@ -39,12 +39,12 @@
       {{ getErrorMessage('password') }}
     </span>
   </div>
-  <div class="login-error" [style.display]="loginError() && loginError().trim() !== '' ? 'block' : 'none'">
+  <div class="alert alert-error" [style.display]="loginError() && loginError().trim() !== '' ? 'block' : 'none'">
     {{ loginError() }}
   </div>
   <button
     type="submit"
-    class="btn-login"
+    class="btn btn-primary"
     [disabled]="isLoading()"
   >
     {{ isLoading() ? 'Iniciando...' : 'Login' }}

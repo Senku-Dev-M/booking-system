@@ -1,13 +1,14 @@
 import { Component, signal, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginForm } from '../../../features/auth/components/login-form/login-form';
+import { UserReservationsComponent } from '../../../features/hotel/components/user-reservations/user-reservations';
 import { AuthService, User } from '../../services/auth-service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LoginForm, RouterModule],
+  imports: [LoginForm, UserReservationsComponent, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser = signal<{username: string} | null>(null);
   isProfileMenuOpen = signal(false);
   isSuccessModalOpen = signal(false);
+  isReservationsModalOpen = signal(false);
 
   constructor(
     @Inject(AuthService) private authService: AuthService,
@@ -103,6 +105,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onSuccessBackdropClick(event: Event) {
     if (event.target === event.currentTarget) {
       this.closeSuccessModal();
+    }
+  }
+
+  openReservationsModal() {
+    this.isReservationsModalOpen.set(true);
+    this.isProfileMenuOpen.set(false);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeReservationsModal() {
+    this.isReservationsModalOpen.set(false);
+    document.body.style.overflow = 'auto';
+  }
+
+  onReservationsBackdropClick(event: Event) {
+    if (event.target === event.currentTarget) {
+      this.closeReservationsModal();
     }
   }
 }

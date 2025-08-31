@@ -1,0 +1,24 @@
+<div class="reservations" *ngIf="!isLoading(); else loading">
+  <ng-container *ngIf="reservations().length; else noData">
+    <div class="reservation-card" *ngFor="let r of reservations()">
+      <div class="reservation-card__info">
+        <p><strong>Hotel:</strong> {{ r.hotelId }}</p>
+        <p><strong>Check-in:</strong> {{ r.checkInDate | date }}</p>
+        <p><strong>Check-out:</strong> {{ r.checkOutDate | date }}</p>
+        <p><strong>Huéspedes:</strong> {{ r.numberOfGuests }}</p>
+        <p><strong>Total:</strong> {{ r.totalPrice | currency }}</p>
+      </div>
+      <button class="reservation-card__cancel"
+              (click)="cancelReservation(r)"
+              [disabled]="!canCancel(r)">
+        Cancelar
+      </button>
+    </div>
+  </ng-container>
+</div>
+<ng-template #loading>
+  <div class="reservations__loading">Cargando...</div>
+</ng-template>
+<ng-template #noData>
+  <div class="reservations__empty">No tienes reservas.</div>
+</ng-template>

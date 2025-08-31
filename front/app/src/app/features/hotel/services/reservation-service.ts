@@ -6,6 +6,7 @@ import {
   Booking,
   CreateBookingRequest
 } from '../../../shared/models/booking-model';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,16 @@ import {
 export class ReservationService {
   private readonly baseUrl = 'http://localhost:3000/api/v1/bookings';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   /**
    * Creates a new reservation using the bookings API
    */
   createReservation(bookingData: CreateBookingRequest): Observable<Booking> {
+    const token = this.authService.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http
-      .post<Booking>(this.baseUrl, bookingData)
+      .post<Booking>(this.baseUrl, bookingData, { headers })
       .pipe(catchError(this.handleError));
   }
 

@@ -17,7 +17,9 @@ const app = express();
 connectDB();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(loggerMiddleware());
 

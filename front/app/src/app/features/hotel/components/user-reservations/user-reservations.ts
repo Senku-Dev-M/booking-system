@@ -1,8 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { forkJoin, map, of, switchMap } from 'rxjs';
 import { ReservationService } from '../../services/reservation-service';
 import { AuthService } from '../../../../core/services/auth-service';
 import { Booking } from '../../../../shared/models/booking-model';
+import { HotelService } from '../../services/hotel-service';
 
 @Component({
   selector: 'app-user-reservations',
@@ -12,14 +14,15 @@ import { Booking } from '../../../../shared/models/booking-model';
   styleUrl: './user-reservations.scss'
 })
 export class UserReservationsComponent implements OnInit {
-  reservations = signal<Booking[]>([]);
+  reservations = signal<(Booking & { hotelName?: string; hotelLocation?: string })[]>([]);
   isLoading = signal(false);
   error = signal('');
   successMessage = signal('');
 
   constructor(
     private reservationService: ReservationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private hotelService: HotelService
   ) {}
 
   ngOnInit() {
@@ -34,16 +37,35 @@ export class UserReservationsComponent implements OnInit {
     }
 
     this.isLoading.set(true);
-    this.reservationService.getUserReservations(user.id).subscribe({
-      next: (res) => {
-        this.reservations.set(res);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.error.set(err.message);
-        this.isLoading.set(false);
-      }
-    });
+    this.reservationService
+      .getUserReservations(user.id)
+      .pipe(
+        switchMap((res) => {
+          if (!res.length) return of([]);
+          const hotelRequests = res.map((r) =>
+            this.hotelService.getHotelById(r.hotelId)
+          );
+          return forkJoin(hotelRequests).pipe(
+            map((hotels) =>
+              res.map((r, idx) => ({
+                ...r,
+                hotelName: hotels[idx].name,
+                hotelLocation: hotels[idx].location
+              }))
+            )
+          );
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.reservations.set(res);
+          this.isLoading.set(false);
+        },
+        error: (err) => {
+          this.error.set(err.message);
+          this.isLoading.set(false);
+        }
+      });
   }
 
   canCancel(reservation: Booking): boolean {

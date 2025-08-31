@@ -4,13 +4,12 @@
       <i class="fas fa-calendar-alt"></i>
       Llegada
     </label>
-    <input 
-      type="date" 
+    <input
+      type="text"
       id="checkIn"
+      #checkInInput
       class="date-picker__input"
-      [min]="minDate()"
-      [value]="getFormattedDate(checkInDate())"
-      (change)="onCheckInChange($event)"
+      placeholder="Selecciona fecha"
       required>
   </div>
   
@@ -19,13 +18,12 @@
       <i class="fas fa-calendar-alt"></i>
       Salida
     </label>
-    <input 
-      type="date" 
+    <input
+      type="text"
       id="checkOut"
+      #checkOutInput
       class="date-picker__input"
-      [min]="minCheckOutDate()"
-      [value]="getFormattedDate(checkOutDate())"
-      (change)="onCheckOutChange($event)"
+      placeholder="Selecciona fecha"
       [disabled]="!checkInDate()"
       required>
   </div>

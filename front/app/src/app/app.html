@@ -3,3 +3,8 @@
   <router-outlet></router-outlet>
 </main>
 <app-footer></app-footer>
+<app-reservation-error-modal
+  *ngIf="unauthorizedModalService.message() as msg"
+  [message]="msg"
+  (close)="unauthorizedModalService.close()"
+></app-reservation-error-modal>

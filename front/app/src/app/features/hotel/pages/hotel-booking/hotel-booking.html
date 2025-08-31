@@ -145,10 +145,31 @@
   }
 
   @if (showBookingModal()) {
-    <app-booking-confirmation-modal 
+    <app-booking-confirmation-modal
       [bookingData]="getBookingData()"
       (confirmed)="onBookingConfirmed($event)"
       (cancelled)="onBookingCancelled()">
     </app-booking-confirmation-modal>
+  }
+
+  @if (showReservationDetails()) {
+    <app-reservation-details-modal
+      [reservation]="createdBooking()!"
+      (close)="onReservationDetailClose()"
+      (cancel)="onCancelReservation($event)">
+    </app-reservation-details-modal>
+  }
+
+  @if (showCancellationConfirmation()) {
+    <app-cancellation-confirmation-modal
+      (close)="onCancellationConfirmClose()">
+    </app-cancellation-confirmation-modal>
+  }
+
+  @if (errorMessage()) {
+    <app-reservation-error-modal
+      [message]="errorMessage()!"
+      (close)="onErrorClose()">
+    </app-reservation-error-modal>
   }
 </div>

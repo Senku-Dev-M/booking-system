@@ -15,10 +15,20 @@ export class BookingController {
         private cancelBookingUseCase: CancelBookingUseCase
     ) {}
 
-    async createBooking(req: Request<{}, {}, CreateBookingRequest>, res: Response<BookingResponse>, next: NextFunction) {
+    async createBooking(
+        req: Request<{}, {}, CreateBookingRequest>,
+        res: Response<BookingResponse | { message: string }>,
+        next: NextFunction
+    ) {
         try {
+            const user = (req as any).user;
+            if (!user?.id) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+
             const bookingData = {
                 ...req.body,
+                userId: user.id,
                 checkInDate: new Date(req.body.checkInDate),
                 checkOutDate: new Date(req.body.checkOutDate)
             };

@@ -42,6 +42,11 @@
                 Configuración
               </button>
 
+              <button class="profile__item" (click)="openReservationsModal()">
+                <i class="fas fa-calendar-check"></i>
+                Mis reservas
+              </button>
+
               <button class="profile__item" (click)="onLogout()">
                 <i class="fas fa-sign-out-alt"></i>
                 Cerrar sesión
@@ -95,6 +100,22 @@
           <i class="fas fa-check-circle success-icon"></i>
           <h3>Inicio de sesión exitoso</h3>
           <p>¡Bienvenido, {{ currentUser()?.username }}!</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (isReservationsModalOpen()) {
+    <div class="reservations-modal-backdrop" (click)="onReservationsBackdropClick($event)">
+      <div class="reservations-modal-container">
+        <div class="reservations-modal-header">
+          <h2>Mis Reservas</h2>
+          <button class="reservations-modal-close" (click)="closeReservationsModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="reservations-modal-content">
+          <app-user-reservations></app-user-reservations>
         </div>
       </div>
     </div>

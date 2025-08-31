@@ -1,0 +1,11 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="confirmation-modal">
+      <h2 class="title">Reserva cancelada</h2>
+      <p>Tu reserva ha sido cancelada exitosamente.</p>
+      <div class="actions">
+        <button class="close-btn" (click)="onClose()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

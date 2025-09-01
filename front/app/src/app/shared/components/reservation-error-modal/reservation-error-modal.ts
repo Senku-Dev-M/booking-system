@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './reservation-error-modal.html',
-  styleUrl: './reservation-error-modal.scss'
+  styleUrl: './reservation-error-modal.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationErrorModalComponent {
   @Input() message = '';

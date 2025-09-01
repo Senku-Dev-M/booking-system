@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface BookingData {
@@ -20,7 +20,8 @@ export interface ContactInfo {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './booking-confirmation-modal.html',
-  styleUrl: './booking-confirmation-modal.scss'
+  styleUrl: './booking-confirmation-modal.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingConfirmationModalComponent {
   @Input() bookingData!: BookingData;

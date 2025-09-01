@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Booking } from '../../models/booking-model';
 
@@ -7,7 +7,8 @@ import { Booking } from '../../models/booking-model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './reservation-details-modal.html',
-  styleUrl: './reservation-details-modal.scss'
+  styleUrl: './reservation-details-modal.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationDetailsModalComponent {
   @Input() reservation!: Booking;
